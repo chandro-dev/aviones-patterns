@@ -1,65 +1,96 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, BookOpenText, PlaneTakeoff, Radar, Workflow } from "lucide-react";
 
-export default function Home() {
+const quickCards = [
+  {
+    title: "Documentacion de Patrones",
+    description:
+      "Explicacion visual y pedagogica de Factory Method, Abstract Factory y su relacion con POO.",
+    href: "/documentacion",
+    icon: BookOpenText,
+  },
+  {
+    title: "Simulador de Aviones",
+    description:
+      "Crea aviones por patron, selecciona familia/tamano y ejecuta comportamientos en tiempo real.",
+    href: "/simulacion",
+    icon: PlaneTakeoff,
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <section className="space-y-8 animated-appear">
+      <div className="glass-panel overflow-hidden rounded-3xl p-8 md:p-10">
+        <p className="terminal-title text-xs text-cyan-300">AeroPattern Terminal</p>
+        <h1 className="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-slate-100 md:text-5xl">
+          Simulador visual de patrones creacionales aplicados a aviones.
+        </h1>
+        <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+          Este entorno esta disenado para exposiciones academicas de Programacion Orientada a
+          Objetos, mostrando en una interfaz tipo tablero de aeropuerto como se modelan y
+          construyen objetos con Factory Method y Abstract Factory.
+        </p>
+        <div className="mt-7 flex flex-wrap gap-3">
+          <Link
+            href="/simulacion"
+            className="soft-glow inline-flex items-center gap-2 rounded-xl bg-cyan-400/95 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Entrar al Simulador
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            href="/documentacion"
+            className="inline-flex items-center gap-2 rounded-xl border border-cyan-300/45 bg-slate-900/65 px-5 py-3 text-sm font-medium text-cyan-100 transition hover:border-cyan-300/70 hover:bg-slate-900"
           >
-            Documentation
-          </a>
+            Ver Documentacion
+            <Workflow className="h-4 w-4" />
+          </Link>
         </div>
-      </main>
-    </div>
+      </div>
+
+      <div className="grid gap-5 lg:grid-cols-2">
+        {quickCards.map(({ title, description, href, icon: Icon }) => (
+          <Link
+            key={title}
+            href={href}
+            className="glass-panel group rounded-2xl p-6 transition hover:-translate-y-1 hover:border-cyan-300/50"
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="terminal-title text-xs text-slate-400">Modulo</p>
+                <h2 className="mt-2 text-2xl font-semibold text-slate-100">{title}</h2>
+              </div>
+              <Icon className="h-6 w-6 text-cyan-300 transition group-hover:text-cyan-200" />
+            </div>
+            <p className="mt-4 text-sm leading-7 text-slate-300">{description}</p>
+            <div className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-cyan-300">
+              Abrir modulo
+              <ArrowRight className="h-4 w-4" />
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      <div className="grid gap-4 rounded-2xl border border-slate-700/70 bg-slate-950/45 p-5 md:grid-cols-3">
+        <div className="rounded-xl border border-slate-700/60 bg-slate-900/65 p-4">
+          <p className="terminal-title text-xs text-slate-400">POO</p>
+          <p className="mt-2 text-sm text-slate-200">Interfaz, abstraccion, herencia y polimorfismo.</p>
+        </div>
+        <div className="rounded-xl border border-slate-700/60 bg-slate-900/65 p-4">
+          <p className="terminal-title text-xs text-slate-400">Factory Method</p>
+          <p className="mt-2 text-sm text-slate-200">Delega la creacion de un avion a fabricas por tamano.</p>
+        </div>
+        <div className="rounded-xl border border-slate-700/60 bg-slate-900/65 p-4">
+          <p className="terminal-title text-xs text-slate-400">Abstract Factory</p>
+          <p className="mt-2 text-sm text-slate-200">Construye familias completas de aviones coherentes.</p>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-3 text-xs text-emerald-200">
+        <Radar className="h-4 w-4" />
+        Entorno listo para ejecutar, exponer y desplegar en Vercel con Next.js App Router.
+      </div>
+    </section>
   );
 }
