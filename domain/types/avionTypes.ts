@@ -1,4 +1,4 @@
-export type FamiliaAvion = "comercial" | "carga"| "militar";
+export type FamiliaAvion = "comercial" | "carga";
 
 export type TamanoAvion = "pequeno" | "mediano" | "grande";
 
