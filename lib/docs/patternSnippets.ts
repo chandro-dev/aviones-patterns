@@ -28,31 +28,43 @@ export function getPatternSnippets(): PatternSnippet[] {
   const selectorSource = readProjectFile("lib/crearAvionConPatron.ts");
   const simSource = readProjectFile("components/simulation/SimulationWorkspace.tsx");
   const factoryMethodSource = readProjectFile(
-    "domain/factories/factory-method/FabricaAvionPequeno.ts",
+    "domain/factories/factory-method/FabricaAvion.ts",
   );
   const abstractFactorySource = readProjectFile(
     "domain/factories/abstract-factory/FabricaAvionesComerciales.ts",
   );
+  const builderBaseSource = readProjectFile("domain/builders/AvionBuilderBase.ts");
 
   return [
     {
-      title: "Uso de Factory Method (fabrica concreta)",
+      title: "Factory Method + Builder (fabrica base)",
       description:
-        "La fabrica concreta por tamano decide que avion instanciar segun familia.",
-      filePath: "domain/factories/factory-method/FabricaAvionPequeno.ts",
-      code: factoryMethodSource.trim(),
+        "La fabrica por tamano delega el ensamblado en builders concretos segun familia.",
+      filePath: "domain/factories/factory-method/FabricaAvion.ts",
+      code: extractBlock(
+        factoryMethodSource,
+        "export abstract class FabricaAvion {",
+        "public abstract crearAvion(familia: FamiliaAvion): Avion;\n}",
+      ),
     },
     {
-      title: "Uso de Abstract Factory (familia concreta)",
+      title: "Abstract Factory + Builder (familia comercial)",
       description:
-        "La fabrica de familia comercial crea variantes pequeno, mediano y grande coherentes.",
+        "La fabrica de familia comercial mantiene coherencia y usa builder para cada tamano.",
       filePath: "domain/factories/abstract-factory/FabricaAvionesComerciales.ts",
       code: abstractFactorySource.trim(),
     },
     {
+      title: "Builder base (contrato aplicado)",
+      description:
+        "Implementacion de `IAvionBuilder` con API fluida y `build()` para ensamblar el avion final.",
+      filePath: "domain/builders/AvionBuilderBase.ts",
+      code: builderBaseSource.trim(),
+    },
+    {
       title: "Selector de patron en tiempo de ejecucion",
       description:
-        "Aqui se ve exactamente donde se decide entre Factory Method y Abstract Factory.",
+        "Aqui se decide entre Factory Method y Abstract Factory, ambos con capa Builder debajo.",
       filePath: "lib/crearAvionConPatron.ts",
       code: extractBlock(
         selectorSource,

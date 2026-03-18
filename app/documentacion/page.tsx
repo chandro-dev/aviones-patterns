@@ -4,7 +4,7 @@ import { FlowStage } from "@/components/docs/FlowStage";
 import { PatternCodeSection } from "@/components/docs/PatternCodeSection";
 import { getPatternSnippets } from "@/lib/docs/patternSnippets";
 import type { LucideIcon } from "lucide-react";
-import { GitBranch, Layers3, Puzzle, Route } from "lucide-react";
+import { GitBranch, Hammer, Layers3, Puzzle, Route } from "lucide-react";
 
 type ConceptCardData = {
   title: string;
@@ -21,7 +21,7 @@ const conceptCards: ConceptCardData[] = [
     points: [
       "Define un metodo de creacion en una clase base.",
       "Cada subclase decide que clase concreta instanciar.",
-      "En el proyecto, las fabricas por tamano crean avion comercial o de carga.",
+      "En el proyecto, las fabricas por tamano delegan el ensamblado en Builder.",
     ],
     icon: GitBranch,
     accent: "cyan",
@@ -32,10 +32,21 @@ const conceptCards: ConceptCardData[] = [
     points: [
       "Expone metodos para crear multiples variantes del producto.",
       "Garantiza consistencia entre objetos de una familia.",
-      "En el proyecto, fabrica familias completas Comercial o Carga por escala.",
+      "En el proyecto, cada fabrica familiar usa Builder para crear pequeno/mediano/grande.",
     ],
     icon: Layers3,
     accent: "amber",
+  },
+  {
+    title: "Builder",
+    subtitle: "Construye objetos complejos paso a paso con una API fluida.",
+    points: [
+      "Define un contrato de ensamblado en `IAvionBuilder`.",
+      "Permite configurar modelo, capacidad, autonomia, motores, color y estado.",
+      "Factory Method y Abstract Factory reutilizan los builders concretos.",
+    ],
+    icon: Hammer,
+    accent: "cyan",
   },
   {
     title: "POO aplicada",
@@ -57,11 +68,12 @@ const flow = [
   },
   {
     title: "2. Fabrica crea objeto",
-    detail: "Factory Method usa fabrica por tamano; Abstract Factory usa fabrica por familia.",
+    detail:
+      "Factory Method usa fabrica por tamano; Abstract Factory usa fabrica por familia. Ambos delegan el ensamblado en Builder.",
   },
   {
-    title: "3. Se devuelve Avion",
-    detail: "Siempre se trabaja contra la interfaz Avion, no contra implementaciones concretas.",
+    title: "3. Builder ensambla el avion",
+    detail: "El builder aplica receta base y entrega una instancia final de Avion.",
   },
   {
     title: "4. Operaciones polimorficas",
@@ -82,12 +94,17 @@ const projectMapping = [
   {
     title: "Factory Method",
     detail:
-      "`FabricaAvionPequeno/Mediano/Grande` crea una instancia concreta segun la familia elegida.",
+      "`FabricaAvionPequeno/Mediano/Grande` define el contexto y llama a `construirAvion(...)`.",
   },
   {
     title: "Abstract Factory",
     detail:
-      "`FabricaAvionesComerciales` y `FabricaAvionesCarga` producen una familia completa de variantes.",
+      "`FabricaAvionesComerciales/Carga/Militares` produce cada variante usando builders concretos.",
+  },
+  {
+    title: "Builder",
+    detail:
+      "`AvionBuilderBase` y sus builders concretos encapsulan el paso a paso de ensamblado.",
   },
   {
     title: "Polimorfismo",
@@ -104,16 +121,16 @@ export default function DocumentacionPage() {
       <header className="glass-panel rounded-3xl p-7 md:p-9">
         <p className="terminal-title text-xs text-cyan-300">Pattern Docs</p>
         <h1 className="mt-3 text-3xl font-semibold tracking-tight text-slate-100 md:text-4xl">
-          Factory Method y Abstract Factory en un dominio de aviones
+          Factory Method, Abstract Factory y Builder en un dominio de aviones
         </h1>
         <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300 md:text-base">
           Esta vista organiza el marco conceptual para una exposicion universitaria: definiciones,
           diferencias, flujo de creacion y relacion directa con los principios de Programacion
-          Orientada a Objetos.
+          Orientada a Objetos con una capa de Builder para ensamblado profesional.
         </p>
       </header>
 
-      <div className="grid gap-5 xl:grid-cols-3">
+      <div className="grid gap-5 xl:grid-cols-4">
         {conceptCards.map((card) => (
           <ConceptCard key={card.title} {...card} />
         ))}
@@ -141,7 +158,7 @@ export default function DocumentacionPage() {
           El proyecto esta organizado para mostrar encapsulamiento, abstraccion y polimorfismo con
           una arquitectura clara de dominio.
         </p>
-        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-6">
           {projectMapping.map((block) => (
             <article
               key={block.title}

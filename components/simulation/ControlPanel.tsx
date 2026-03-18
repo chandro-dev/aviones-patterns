@@ -17,7 +17,7 @@ type ControlPanelProps = {
 };
 
 const patrones: PatronCreacional[] = ["factory_method", "abstract_factory"];
-const familias: FamiliaAvion[] = ["comercial", "carga"];
+const familias: FamiliaAvion[] = ["comercial", "carga","militar"];
 const tamanos: TamanoAvion[] = ["pequeno", "mediano", "grande"];
 
 export function ControlPanel({

@@ -27,7 +27,7 @@ export function FlightBoard({ registros, selectedId, onSelect }: FlightBoardProp
               <th className="px-4 py-3 font-semibold">Flight / Model</th>
               <th className="px-4 py-3 font-semibold">Type</th>
               <th className="px-4 py-3 font-semibold">Scale</th>
-              <th className="px-4 py-3 font-semibold">Pattern Engine</th>
+              <th className="px-4 py-3 font-semibold">Pattern Engine</th> 
               <th className="px-4 py-3 font-semibold">System Status</th>
             </tr>
           </thead>

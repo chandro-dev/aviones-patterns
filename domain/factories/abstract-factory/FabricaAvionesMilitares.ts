@@ -1,10 +1,10 @@
 import { AbstractFactoryAviones } from "@/domain/factories/abstract-factory/AbstractFactoryAviones";
-import { AvionCargaBuilder } from "@/domain/builders/AvionCargaBuilder";
+import { AvionMilitarBuilder } from "@/domain/builders/AvionMilitarBuilder";
 import { Avion } from "@/domain/interfaces/Avion";
-import { TamanoAvion } from "@/domain/types/avionTypes";
 import { generarIdentidadAvion } from "@/lib/aircraftIdentity";
+import { TamanoAvion } from "@/domain/types/avionTypes";
 
-export class FabricaAvionesCarga implements AbstractFactoryAviones {
+export class FabricaAvionesMilitares implements AbstractFactoryAviones {
   public crearAvionPequeno(): Avion {
     return this.crearConBuilder("pequeno");
   }
@@ -16,8 +16,8 @@ export class FabricaAvionesCarga implements AbstractFactoryAviones {
   public crearAvionGrande(): Avion {
     return this.crearConBuilder("grande");
   }
- 
+
   private crearConBuilder(tamano: TamanoAvion): Avion {
-    return new AvionCargaBuilder(generarIdentidadAvion("CG"), tamano).build();
+    return new AvionMilitarBuilder(generarIdentidadAvion("AP"), tamano).setMotores(40).setColor("TETAS").build();
   }
 }

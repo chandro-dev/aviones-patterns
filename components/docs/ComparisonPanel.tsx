@@ -7,7 +7,7 @@ export function ComparisonPanel() {
       <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-300">
         Ambos resuelven creacion de objetos, pero con escalas diferentes. Factory Method delega
         la creacion de una variante concreta; Abstract Factory entrega un conjunto coherente de
-        variantes.
+        variantes. En esta version, ambos se apoyan en Builder para el ensamblado interno.
       </p>
 
       <div className="mt-6 overflow-hidden rounded-xl border border-slate-700/80">
@@ -35,16 +35,21 @@ export function ComparisonPanel() {
             <tr className="border-t border-slate-700/80">
               <td className="px-4 py-3 text-slate-200">Aplicacion en este proyecto</td>
               <td className="px-4 py-3">
-                `FabricaAvionPequeno/Mediano/Grande` decide modelo comercial o carga.
+                `FabricaAvionPequeno/Mediano/Grande` decide el tamano y llama `construirAvion(...)`.
               </td>
               <td className="px-4 py-3">
-                `FabricaAvionesComerciales/Carga` genera pequeno, mediano y grande de su familia.
+                `FabricaAvionesComerciales/Carga/Militares` genera pequeno, mediano y grande de su familia.
               </td>
             </tr>
             <tr className="border-t border-slate-700/80">
               <td className="px-4 py-3 text-slate-200">Beneficio OO</td>
               <td className="px-4 py-3">Reduce acoplamiento al crear un solo objeto.</td>
               <td className="px-4 py-3">Asegura consistencia de objetos relacionados.</td>
+            </tr>
+            <tr className="border-t border-slate-700/80">
+              <td className="px-4 py-3 text-slate-200">Capa Builder</td>
+              <td className="px-4 py-3">Usa `AvionBuilderBase` para ensamblar la variante por tamano.</td>
+              <td className="px-4 py-3">Usa builders concretos para ensamblar cada variante familiar.</td>
             </tr>
           </tbody>
         </table>

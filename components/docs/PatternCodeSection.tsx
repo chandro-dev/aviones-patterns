@@ -12,7 +12,7 @@ export function PatternCodeSection({ snippets }: PatternCodeSectionProps) {
       </h2>
       <p className="mt-2 max-w-3xl text-sm leading-7 text-slate-300">
         Los siguientes fragmentos se leen directamente de archivos del proyecto. Asi se evidencia
-        exactamente donde y como se aplican Factory Method y Abstract Factory.
+        exactamente donde y como se aplican Factory Method, Abstract Factory y Builder.
       </p>
 
       <div className="mt-5 space-y-4">

@@ -8,6 +8,7 @@ export const patronLabels: Record<PatronCreacional, string> = {
 export const familiaLabels: Record<FamiliaAvion, string> = {
   comercial: "Comercial",
   carga: "Carga",
+  militar: "Militar"
 };
 
 export const tamanoLabels: Record<TamanoAvion, string> = {

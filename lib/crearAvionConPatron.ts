@@ -1,6 +1,7 @@
 import { AbstractFactoryAviones } from "@/domain/factories/abstract-factory/AbstractFactoryAviones";
 import { FabricaAvionesCarga } from "@/domain/factories/abstract-factory/FabricaAvionesCarga";
 import { FabricaAvionesComerciales } from "@/domain/factories/abstract-factory/FabricaAvionesComerciales";
+import { FabricaAvionesMilitares } from "@/domain/factories/abstract-factory/FabricaAvionesMilitares";
 import { FabricaAvion } from "@/domain/factories/factory-method/FabricaAvion";
 import { FabricaAvionGrande } from "@/domain/factories/factory-method/FabricaAvionGrande";
 import { FabricaAvionMediano } from "@/domain/factories/factory-method/FabricaAvionMediano";
@@ -30,7 +31,9 @@ function resolverAbstractFactory(familia: FamiliaAvion): AbstractFactoryAviones 
   if (familia === "comercial") {
     return new FabricaAvionesComerciales();
   }
-
+  if (familia === "militar") {
+    return new FabricaAvionesMilitares();
+  }
   return new FabricaAvionesCarga();
 }
 
